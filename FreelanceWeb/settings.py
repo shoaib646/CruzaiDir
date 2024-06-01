@@ -1,8 +1,5 @@
 from pathlib import Path
-from dotenv import load_dotenv, dotenv_values
 import os
-
-load_dotenv()
 
 
 
@@ -14,7 +11,7 @@ APPONE_STATIC_DIR = Path.joinpath(BASE_DIR, 'onepage/static')
 SECRET_KEY = 'django-insecure-(7)ub=7g6_rw!l6e+jgmenz3yhy(m#w$if*6+z)n+c*qd2fn1)'
 DEBUG = False
 
-ALLOWED_HOSTS = ['13.233.152.235', '172.31.7.184','www.cruzai.tech', 'cruzai.tech']
+ALLOWED_HOSTS = ['13.233.152.235']
 
 
 
@@ -126,12 +123,13 @@ USE_TZ = True
 
 import os
 # if DEBUG:
-STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'onepage/static')
-    ]
-# else:
-STATIC_URL = '/onepage/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'onepage/staticfiles')
+# STATICFILES_DIRS = [
+#         os.path.join(BASE_DIR, 'onepage/static')
+#     ]
+# # else:
+# STATIC_URL = '/onepage/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'onepage/staticfiles')
+STATIC_ROOT = '/var/www/mysite/assets/'
 
 
 

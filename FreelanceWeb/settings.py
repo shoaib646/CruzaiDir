@@ -11,7 +11,7 @@ APPONE_STATIC_DIR = Path.joinpath(BASE_DIR, 'onepage/static')
 SECRET_KEY = 'django-insecure-(7)ub=7g6_rw!l6e+jgmenz3yhy(m#w$if*6+z)n+c*qd2fn1)'
 DEBUG = False
 
-ALLOWED_HOSTS = ['13.233.152.235']
+ALLOWED_HOSTS = ['65.2.142.212','172.31.5.53']
 
 
 

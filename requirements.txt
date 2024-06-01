@@ -3,3 +3,4 @@ pandas==2.2.0
 tensorflow
 scikit-learn
 statsmodels
+django-cors-headers

@@ -69,7 +69,7 @@ CSRF_TRUSTED_ORIGINS = ['https://www.cruzai.tech', 'https://cruzai.tech']
 
 CORS_REPLACE_HTTPS_REFERER = True
 
-CSRF_COOKIE_DOMAIN = 'cruzai.tech.com'
+CSRF_COOKIE_DOMAIN = 'cruzai.tech'
 
 CORS_ORIGIN_WHITELIST = (
     'https://cruzai.tech',

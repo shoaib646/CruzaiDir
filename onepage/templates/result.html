@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{% static 'css/pstyle.css' %}">
+    <meta name="viewport" content="width={device-width}, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>DL Model Answer</title>
+</head>
+<body>
+
+    <div class="prediction-container">
+        
+        <h1>Stats Model Prediction</h1>
+
+        
+        <p class="prediction-text"><center>Your prediction result: </center></p>
+        <p class="prediction-result">Average Salary of  employee with 
+            <p><center style="font-size: 25px;">{{ yoe }}</center></p>
+            <center class="prediction-result">Years experience  in Canada would range between :</center>
+            <p><center style="font-size: 25px;">{{ predict }}&nbsp;p.a.</center></p>
+        </p>
+
+
+
+
+
+
+
+
+
+        <center><button class="btn btn-primary btn-sm" style="background-color: green;"><a class="btn btn-primary btn-sm" href="{% url 'home' %}" style="background-color: green; border-color: green;">Go Home</a></button>
+        </center>
+    </div>
+
+    
+    
+</body>
+</html>

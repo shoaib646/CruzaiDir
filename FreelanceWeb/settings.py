@@ -9,9 +9,9 @@ APPONE_STATIC_DIR = Path.joinpath(BASE_DIR, 'onepage/static')
 # capstone = Path.joinpath(BASE_DIR,'Capstone')
 
 SECRET_KEY = 'django-insecure-(7)ub=7g6_rw!l6e+jgmenz3yhy(m#w$if*6+z)n+c*qd2fn1)'
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['65.2.142.212','172.31.5.53']
+ALLOWED_HOSTS = ['13.126.178.79', '172.31.6.157']
 
 
 
@@ -127,9 +127,9 @@ import os
 #         os.path.join(BASE_DIR, 'onepage/static')
 #     ]
 # # else:
-# STATIC_URL = '/onepage/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'onepage/staticfiles')
-STATIC_ROOT = '/var/www/mysite/assets/'
+STATIC_URL = '/onepage/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'onepage/staticfiles')
+
 
 
 

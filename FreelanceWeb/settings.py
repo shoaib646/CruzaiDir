@@ -11,7 +11,7 @@ APPONE_STATIC_DIR = Path.joinpath(BASE_DIR, 'onepage/static')
 SECRET_KEY = 'django-insecure-(7)ub=7g6_rw!l6e+jgmenz3yhy(m#w$if*6+z)n+c*qd2fn1)'
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 

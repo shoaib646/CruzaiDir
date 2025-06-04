@@ -63,63 +63,64 @@ with st.sidebar:
         openai_api_key = st.text_input("OpenAI Key:", type="password")
         pinecone_api_key = st.text_input("Pinecone Key:", type="password")
 
-    with st.expander("📁 Document Manager", expanded=True):
-        uploaded_files = st.file_uploader("Upload Documents",
-                                          type=["pdf", "docx", "doc"],
-                                          accept_multiple_files=True,
-                                          help="Upload multiple PDF or Word documents",
-                                          key="file_uploader")
+    # Document Manager section
+    st.divider()
+    st.subheader("📁 Document Manager")
+    uploaded_files = st.file_uploader("Upload Documents",
+                                      type=["pdf", "docx", "doc"],
+                                      accept_multiple_files=True,
+                                      help="Upload multiple PDF or Word documents")
 
-        upload_progress = st.progress(0, text="Ready for upload...")
+    upload_progress = st.progress(0, text="Ready for upload...")
 
-        if st.button("🚀 Process & Index Documents", type="primary"):
-            if uploaded_files and openai_api_key and pinecone_api_key:
-                try:
-                    embeddings = OpenAIEmbeddings(
-                        model="text-embedding-3-large",
-                        api_key=openai_api_key,
-                        dimensions=1536
-                    )
-                    index = Pinecone(api_key=pinecone_api_key).Index("myindex")
-                    vector_store = PineconeVectorStore(embedding=embeddings, index=index)
+    if st.button("🚀 Process & Index Documents", type="primary"):
+        if uploaded_files and openai_api_key and pinecone_api_key:
+            try:
+                embeddings = OpenAIEmbeddings(
+                    model="text-embedding-3-large",
+                    api_key=openai_api_key,
+                    dimensions=1536
+                )
+                index = Pinecone(api_key=pinecone_api_key).Index("myindex")
+                vector_store = PineconeVectorStore(embedding=embeddings, index=index)
 
-                    total_files = len(uploaded_files)
-                    processed_docs = []
+                total_files = len(uploaded_files)
+                processed_docs = []
 
-                    for i, file in enumerate(uploaded_files):
-                        upload_progress.progress((i + 1) / total_files,
-                                                 text=f"Processing {file.name}...")
-                        processed_docs.extend(process_file([file]))
+                for i, file in enumerate(uploaded_files):
+                    upload_progress.progress((i + 1) / total_files,
+                                             text=f"Processing {file.name}...")
+                    processed_docs.extend(process_file([file]))
 
-                    text_splitter = RecursiveCharacterTextSplitter(
-                        chunk_size=1000,
-                        chunk_overlap=200,
-                        add_start_index=True,
-                    )
-                    splits = text_splitter.split_documents(processed_docs)
+                text_splitter = RecursiveCharacterTextSplitter(
+                    chunk_size=1000,
+                    chunk_overlap=200,
+                )
+                splits = text_splitter.split_documents(processed_docs)
 
-                    with st.spinner("📄 Uploading to vector database..."):
-                        vector_store.add_documents(splits)
+                with st.spinner("📄 Uploading to vector database..."):
+                    vector_store.add_documents(splits)
 
-                    st.session_state.uploaded_files = uploaded_files
-                    upload_progress.empty()
-                    st.success(f"✅ Processed {len(splits)} chunks from {total_files} files!")
+                st.session_state.uploaded_files = uploaded_files
+                upload_progress.empty()
+                st.success(f"✅ Processed {len(splits)} chunks from {total_files} files!")
 
-                except Exception as e:
-                    st.error(f"❌ Error processing documents: {str(e)}")
-            else:
-                st.warning("⚠️ Please upload documents and enter API keys first")
+            except Exception as e:
+                st.error(f"❌ Error processing documents: {str(e)}")
+        else:
+            st.warning("⚠️ Please upload documents and enter API keys first")
 
-        if st.session_state.uploaded_files:
-            with st.expander("📂 Uploaded Documents", expanded=True):
-                for file in st.session_state.uploaded_files:
-                    col1, col2 = st.columns([0.8, 0.2])
-                    col1.caption(file.name)
-                    col2.button(
-                        "❌",
-                        key=f"remove_{file.name}",
-                        on_click=lambda f=file: st.session_state.uploaded_files.remove(f)
-                    )
+    # Uploaded files list without nested expander
+    if st.session_state.uploaded_files:
+        st.subheader("Uploaded Files")
+        for file in st.session_state.uploaded_files:
+            col1, col2 = st.columns([0.8, 0.2])
+            col1.caption(file.name)
+            col2.button(
+                "❌",
+                key=f"remove_{file.name}",
+                on_click=lambda f=file: st.session_state.uploaded_files.remove(f)
+            )
 
     st.divider()
 
@@ -139,13 +140,10 @@ with st.sidebar:
         st.session_state.messages = [{
             "role": "assistant",
             "content": "🔃 Chat history cleared! How can I help you?",
-            "sources": []
         }]
         st.rerun()
 
 # Main chat UI
-# st.title("Custom RAG! Chat with your Docs! Don't worry, I don't save any data.")
-
 st.markdown("""
     <h1 style='text-align: center; font-size: 1.5rem; font-weight: 700; 
     margin-bottom: 1rem; width: 100%; display: block;'>
@@ -153,6 +151,7 @@ st.markdown("""
     </h1>
 """, unsafe_allow_html=True)
 
+# Chat messages display
 for message in st.session_state.messages:
     role_class = "user" if message["role"] == "user" else "assistant"
     icon = "👤" if message["role"] == "user" else "🧠"
@@ -193,7 +192,7 @@ if prompt := st.chat_input("Ask me anything about your document..."):
         memory = MemorySaver()
         agent_executor = create_react_agent(llm, [retrieve], checkpointer=memory)
         config = {"configurable": {"thread_id": "1a"}}
-
+        
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.spinner("Thinking..."):
             response = agent_executor.invoke(

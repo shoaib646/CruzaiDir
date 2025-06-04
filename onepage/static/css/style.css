@@ -182,7 +182,7 @@ ul
     position: absolute;
     top: 50px;
     font-size: 30px;
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
 }
 .aside .logo a
 {

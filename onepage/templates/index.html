@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cruz ai </title>
+  <title>Cruz AI </title>
 
   <!-- css files -->
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -16,6 +16,57 @@
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
   <link rel="stylesheet" href="{% static 'css/skins/color-1.css' %}" class="alternate-style" title="color-1" disabled>
   <link rel="stylesheet" href="{% static 'css/style-switcher.css' %}">
+  <!-- Add AOS library for scroll animations -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  
+  <style>
+    /* Add smooth scroll behavior */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Enhanced nav hover effects */
+    .nav a {
+      position: relative;
+      transition: all 0.3s ease;
+    }
+    
+    .nav a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--skin-color);
+      transition: width 0.3s ease;
+    }
+    
+    .nav a:hover:after {
+      width: 100%;
+    }
+    
+    /* Pulse animation for logo */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .logo a {
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+    
+    /* Enhanced blink animation */
+    .blink_me {
+      animation: blinker 1.5s linear infinite;
+    }
+    
+    @keyframes blinker {
+      50% { opacity: 0.5; }
+    }
+  </style>
 
 
   
@@ -41,11 +92,11 @@
         <li><a href="{%url 'home' %}" class="active"><i class="fa fa-home"></i>Home</a></li>
         <li><a href="#expertise"><i class="fa fa-list"></i>Skills</a></li>
         <li><a href="#portfolio"><i class="fa fa-briefcase"></i>Projects</a></li>
-        <li><a href="#about"><i class="fa fa-user"></i>About Me</a></li>
-        <li><a href="#enquire"><i class="fa fa-comments"></i>Contact</a></li>    
         <li><a href="https://cruzai.streamlit.app/"><i class="fa fa-comments"></i>Chatbot</a></li>
         <li><a href="https://cruz-ai.streamlit.app/"><i class="fas fa-graduation-cap icon" style="color: green;"></i>DC's Project</a></li>   
         <li><a href="https://github.com/shoaib646/Ops_Portfolio"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-vector-spline"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M3 17m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M17 5c-6.627 0 -12 5.373 -12 12" /></svg></i>MLOps Pipeline</li>
+        <li><a href="#about"><i class="fa fa-user"></i>About Me</a></li>
+        <li><a href="#enquire"><i class="fa fa-comments"></i>Contact</a></li>    
         
       </ul>
     </div>
@@ -60,7 +111,7 @@
       
         <div class="container">
           <div class="row">
-            <div class="home-info padd-15">
+            <div class="home-info padd-15" data-aos="fade-right" data-aos-duration="1000">
               <h3>
                 {% if messages %}
                 <ul class="messages">
@@ -74,10 +125,13 @@
               <h3 class="hello">Hello, my name is <span class="name">Shoaib Ahmed</span></h3>
               <h3 class="my-profession">I' m a <span class="typing">Data Scientist</span></h3>
               <p>Machine Learning Engineer with 6 years of experience in deploying production-grade machine learning and AI applications using Python, SQL, and cloud platforms including AWS, Azure, and GCP. Skilled in building scalable ML models with XGBoost, scikit-learn, SageMaker, and S3, with a strong ability to manage multiple priorities and deliver actionable insights from raw datasets. Solid background in developing and deploying AI/ML and Generative AI solutions, with a strong understanding of MLOps principles and a commitment to writing clean, maintainable code.</p>
-              <a href="{% static 'media/Shoaib-Resume.pdf' %}" class="btn" download="Shoaib Resume">Download Resume</a>
+              <a href="{% static 'media/Shoaib-Resume.pdf' %}" class="btn btn-animated" download="Shoaib Resume">
+                <span class="btn-text">Download Resume</span>
+                <span class="btn-icon"><i class="fas fa-download"></i></span>
+              </a>
             </div>
-            <div class="home-img padd-15">
-              <img src="{% static 'media/shoaib.jpg' %}" alt="check path again">
+            <div class="home-img padd-15" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+              <img src="{% static 'media/shoaib.jpg' %}" alt="check path again" class="tilt-image">
             </div>
           </div>
         </div>
@@ -89,77 +143,94 @@
         <div class="container">
 
           <div class="row">
-            <div class="section-title padd-15">
+            <div class="section-title padd-15" data-aos="fade-up">
               <h2>Portfolio</h2>
             </div>
           </div>
 
           <div class="row">
-            <div class="portfolio-heading padd-15">
-              <h2>My Recent Projects & More on<a href="http://www.github.com/shoaib646"> GitHub (LLMs, Recommender Systems, MLOps &amp; more.)</a></h2>
+            <div class="portfolio-heading padd-15" data-aos="fade-up" data-aos-delay="100">
+              <h2>My Recent Projects & More on<a href="http://www.github.com/shoaib646" class="github-link"> GitHub <i class="fab fa-github"></i> (LLMs, Recommender Systems, MLOps &amp; more.)</a></h2>
             </div>
           </div>
 
           <div class="row">
 
               <!-- portfolio item start -->
-              <div class="portfolio-item padd-15">
-                <h6 style="font-size: 15px;  color: green;"><u><a href="https://www.amitchapke.com"> Web Development - Click Me</a></u></h6>
-                <div class="portfolio-item-inner shadow-dark">
+              <div class="portfolio-item padd-15" data-aos="zoom-in" data-aos-delay="200">
+                <h6 style="font-size: 15px;  color: green;"><u><a href="https://www.amitchapke.com" class="portfolio-link"> Web Development - Click Me</a></u></h6>
+                <div class="portfolio-item-inner shadow-dark portfolio-card">
                   <div class="portfolio-img">
-                    
                     <img src="{% static 'media/website.gif'%}" alt="">
+                  </div>
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                      <h4>Web Development</h4>
+                      <p>Modern responsive website design</p>
+                      <a href="https://www.amitchapke.com" class="btn btn-sm">View Project</a>
+                    </div>
                   </div>
                 </div>
               </div>
               <!-- portfolio item END -->
 
               <!-- portfolio item start -->
-              <div class="portfolio-item padd-15">
+              <div class="portfolio-item padd-15" data-aos="zoom-in" data-aos-delay="300">
                 <h6 style="font-size: 15px; color: green;">Object Detection</h6>
-                <div class="portfolio-item-inner shadow-dark">
+                <div class="portfolio-item-inner shadow-dark portfolio-card">
                   <div class="portfolio-img">
                     <img src="{% static 'media/CV.gif'%}" alt="">
                   </div>
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                      <h4>Computer Vision</h4>
+                      <p>Real-time object detection system</p>
+                      <a href="#" class="btn btn-sm">View Details</a>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- portfolio item END -->
 
               <!-- portfolio item start -->
-              <div  class="portfolio-item padd-15">
+              <div class="portfolio-item padd-15" data-aos="zoom-in" data-aos-delay="400">
                 <h6 style="font-size: 15px;  color: green;">Predictive Model</h6>
                 <div class="portfolio-predict" style="width: auto; height: auto; color: green;">
                   <br><br>
                   <p class="hello" style="color: red;">Note: This is a Stats Model Predicting Salary of a skilled Canadian Citizen based on his/her years of experience.<a
                           href="https://www.statcan.gc.ca/">Trained Data Source</a></p><br>
-                  <form action="result">
-
-                    <h4 style=" color: green;">Years of Experience: <input type="number" name="experience" id="" required><br><br></h4>
-
-                    <button type="submit" class="btn btn-success">Predict</button>
-                    
-                </form>
-
+                  <form action="result" class="predict-form">
+                    <div class="form-group">
+                      <h4 style="color: green;">Years of Experience: 
+                        <input type="number" name="experience" id="experience" min="0" max="50" required class="form-control">
+                      </h4>
+                    </div>
+                    <button type="submit" class="btn btn-success animated-btn">
+                      <span><i class="fas fa-chart-line"></i> Predict</span>
+                    </button>
+                  </form>
                 </div>
               </div>
               <!-- portfolio item END -->
 
-
               <!-- portfolio item start -->
-              <div class="portfolio-item padd-15">
+              <div class="portfolio-item padd-15" data-aos="zoom-in" data-aos-delay="500">
                 <h6 style="font-size: 15px;  color: green;">Tableau Dashboard</h6>
-                  <div class="portfolio-item-inner shadow-dark">
-                    <div class="portfolio-img">
-                      <img src="{% static 'media/Dashboard.gif'%}" alt="">
+                <div class="portfolio-item-inner shadow-dark portfolio-card">
+                  <div class="portfolio-img">
+                    <img src="{% static 'media/Dashboard.gif'%}" alt="">
+                  </div>
+                  <div class="portfolio-overlay">
+                    <div class="portfolio-info">
+                      <h4>Data Visualization</h4>
+                      <p>Interactive business intelligence dashboard</p>
+                      <a href="#" class="btn btn-sm">View Details</a>
                     </div>
                   </div>
+                </div>
               </div>
               <!-- portfolio item END -->
-
-
-              
           </div>
-
         </div>
       </section>
       <!-- Portfolio Section End -->
@@ -168,7 +239,7 @@
       <section class="about section" id="about">
         <div class="container">
             <div class="row">
-                <div class="section-title padd-15">
+                <div class="section-title padd-15" data-aos="fade-up">
                     <h2>About Me </h2>
                 </div>
             </div>
@@ -177,24 +248,23 @@
                 <div class="about-content padd-15">
 
                   <div class="row">
-                      <div class="about-text padd-15">
-                        <h3>I'm Shoaib Ahmed and  <span>Data Scientist</span></h3>
-                        <p>IT Professional with 5 years of experience building scalable applications in Analytics & Artificial Intelligence (AI) domain
-                          and having exposure in statistics analysis and machine learning, leveraging data-driven insights in Agile model.</p>
+                      <div class="about-text padd-15" data-aos="fade-up" data-aos-delay="200">
+                        <h3>I'm a <span>AI/ML Solution Architect and Data Scientist</span></h3>
+                        <p>With 6+ years of experience delivering scalable AI applications and infrastructure. I specialize in designing and deploying production-grade LLM systems, Retrieval-Augmented Generation (RAG) workflows, and LangChain-based applications across Azure, GCP, and AWS environments. Adept at prompt engineering, chatbot system development, microservices integration, and MLOps with CI/CD pipelines. Passionate about building intelligent systems that are robust, maintainable, and performance-optimized.</p>
                       </div>
                   </div> 
 
                   <div class="row">
-                      <div class="personal-info padd-15">
+                      <div class="personal-info padd-15" data-aos="fade-up" data-aos-delay="300">
 
                           <div class="row">
 
                               <div class="info-item padd-15">
-                                  <p>Birthday: <span>11 Nov 1995</span></p>
+                                  <p>Location: <span>Toronto, ON</span></p>
                               </div>
 
                               <div class="info-item padd-15">
-                                  <p>Age: <span>27</span></p>
+                                  <p>GitHub: <span><a href="https://github.com/shoaib646" target="_blank">github.com/shoaib646</a></span></p>
                               </div>
 
                               <div class="info-item padd-15">
@@ -202,20 +272,19 @@
                               </div>
 
                               <div class="info-item padd-15">
-                                  <p>Email: <span>cruzai.contact@gmail.com </span></p>
+                                  <p>Email: <span>contact@cruzai.tech</span></p>
                               </div>
 
                               <div class="info-item padd-15">
-                                  <p>Degree: <span> MBA (IT & Systems)</span></p>
+                                  <p>Education: <span>AI & Cloud Computing</span></p>
                               </div>
 
                               <div class="info-item padd-15">
-                                  <p>Phone: <span style="font-size:12.5px">+1 437-566-4584  | +91 845-184-2346 </span></p>
-
+                                  <p>Open to: <span>Relocation & Remote Work</span></p>
                               </div>
 
                               <div class="info-item padd-15">
-                                  <p>Location: <span>Toronto & Mumbai </span></p>
+                                  <p>Experience: <span>6+ Years</span></p>
                               </div>
 
                               <div class="info-item padd-15">
@@ -226,7 +295,9 @@
 
                           <div class="row">
                               <div class="buttons padd-15">
-                                  <a href="#enquire" class="btn hire-me"> Hire Me</a>
+                                  <a href="#enquire" class="btn hire-me animated-btn"> 
+                                    <span><i class="fas fa-handshake"></i> Hire Me</span>
+                                  </a>
                               </div>
                               <!-- additional  one start -->
 
@@ -247,10 +318,10 @@
                               <div class="skills padd-15">
                                 <div class="row">
                                   <div class="skill-item padd-15">
-                                    <h5>Django</h5>
+                                    <h5>RAG & LLMs</h5>
                                     <div class="progress">
-                                        <div class="progress-in" style="width: 53%;"></div>
-                                        <div class="skill-percent">53%</div>
+                                        <div class="progress-in" style="width: 85%;"></div>
+                                        <div class="skill-percent">85%</div>
                                     </div>
                                   </div>
                                 </div>
@@ -259,10 +330,10 @@
                               <div class="skills padd-15">
                                 <div class="row">
                                   <div class="skill-item padd-15">
-                                    <h5>FrontEnd Tech</h5>
+                                    <h5>LangChain & Prompt Engineering</h5>
                                     <div class="progress">
-                                        <div class="progress-in" style="width: 63%;"></div>
-                                        <div class="skill-percent">63%</div>
+                                        <div class="progress-in" style="width: 78%;"></div>
+                                        <div class="skill-percent">78%</div>
                                     </div>
                                   </div>
                                 </div>
@@ -273,7 +344,7 @@
 
                       </div>
 
-                      <div class="skills padd-15">
+                      <div class="skills padd-15" data-aos="fade-up" data-aos-delay="400">
                           <div class="row">
                               
                               <div class="skill-item padd-15">
@@ -287,32 +358,32 @@
                               <div class="skill-item padd-15">
                                   <h5>Machine & Deep Learning</h5>
                                   <div class="progress">
-                                      <div class="progress-in" style="width: 64%;"></div>
-                                      <div class="skill-percent">64%</div>
+                                      <div class="progress-in" style="width: 75%;"></div>
+                                      <div class="skill-percent">75%</div>
                                   </div>
                               </div>
 
                               <div class="skill-item padd-15">
-                                  <h5>Pandas</h5>
+                                  <h5>MLOps & CI/CD</h5>
                                   <div class="progress">
-                                      <div class="progress-in" style="width: 66%;"></div>
-                                      <div class="skill-percent">66%</div>
+                                      <div class="progress-in" style="width: 70%;"></div>
+                                      <div class="skill-percent">70%</div>
                                   </div>
                               </div>
 
                               <div class="skill-item padd-15">
-                                  <h5>Numpy & SQL</h5>
+                                  <h5>Cloud (AWS, Azure, GCP)</h5>
                                   <div class="progress">
-                                      <div class="progress-in" style="width: 58%;"></div>
-                                      <div class="skill-percent">58%</div>
+                                      <div class="progress-in" style="width: 68%;"></div>
+                                      <div class="skill-percent">68%</div>
                                   </div>
                               </div>
 
                               <div class="skill-item padd-15">
-                                  <h5>Data Visualization - Tableau/Power BI</h5>
+                                  <h5>Vector DBs & Data Engineering</h5>
                                   <div class="progress">
-                                      <div class="progress-in" style="width: 56%;"></div>
-                                      <div class="skill-percent">56%</div>
+                                      <div class="progress-in" style="width: 65%;"></div>
+                                      <div class="skill-percent">65%</div>
                                   </div>
                               </div>
 
@@ -323,7 +394,7 @@
 
                   <div class="row">
 
-                      <div class="education padd-15">
+                      <div class="education padd-15" data-aos="fade-up" data-aos-delay="500">
                           <h3 class="title"> Education </h3>
                           <div class="row">
                               <div class="timeline-box padd-15">
@@ -335,8 +406,8 @@
                                           <h3 class="timeline-date">
                                               <i class="fa fa-calendar"></i> Sept 2023 - April 2025
                                           </h3>
-                                          <h4 class="timeline-title">Artificial Intelligence Analysis & Cloud Computing (Certifications)</h4>
-                                          <p class="timeline-text"> Durham College, CANADA.</p>
+                                          <h4 class="timeline-title">Post Graduate Degree in AI (Data Science) and Cloud Computing (STEM)</h4>
+                                          <p class="timeline-text">Durham College, Canada</p>
                                           <div class="canadian-flag"></div>
                                       </div>
 
@@ -345,8 +416,8 @@
                                           <h3 class="timeline-date">
                                               <i class="fa fa-calendar"></i> 2018-2021
                                           </h3>
-                                          <h4 class="timeline-title">Master in Business Administration ( IT & Systems )</h4>
-                                          <p class="timeline-text">The Institute of Chartered Financial Analysts of India, University of Tripura. INDIA</p>
+                                          <h4 class="timeline-title">Master in Business Administration (IT & Systems)</h4>
+                                          <p class="timeline-text">ICFAI University</p>
                                           <div class="indian-flag"></div>
                                       </div>
 
@@ -355,8 +426,8 @@
                                           <h3 class="timeline-date">
                                               <i class="fa fa-calendar"></i> 2014-2017
                                           </h3>
-                                          <h4 class="timeline-title">BS (Information Technology)</h4>
-                                          <p class="timeline-text">VPM College, University of Mumbai, INDIA.</p>
+                                          <h4 class="timeline-title">Bachelor of Science (Information Technology)</h4>
+                                          <p class="timeline-text">University of Mumbai</p>
                                           <div class="indian-flag"></div>
                                       </div>
 
@@ -365,56 +436,47 @@
                           </div>
                       </div>
 
-                      <div class="experience padd-15">
+                      <div class="experience padd-15" data-aos="fade-up" data-aos-delay="600">
                           <h3 class="title"> Experience </h3>
                           <div class="row">
                               <div class="timeline-box padd-15">
                                   <div class="timeline shadow-dark">
 
-                                       <!-- timeline item -->
+                                      <!-- timeline item -->
                                       <div class="timeline-item">
                                           <div class="circle-dot"></div>
                                           <h3 class="timeline-date">
-                                              <i class="fa fa-calendar"></i> Nov 2022 - August 2023
+                                              <i class="fa fa-calendar"></i> May 2024 - Present
                                           </h3>
-                                          <h4 class="timeline-title">eClerx Services Ltd. <br>Designation: Associate Program Manager ( Data Science ) </h4>
-                                          <p class="timeline-text">Here i was aligned with the Data Aquisition team where i have mastered my Scripting Skills.</p>
-                                          <div class="indian-flag"></div>
-                                      </div>
-
-                                       <!-- timeline item -->
-                                      <div class="timeline-item">
-                                          <div class="circle-dot"></div>
-                                          <h3 class="timeline-date">
-                                              <i class="fa fa-calendar"></i> Nov 2022 - August 2023
-                                          </h3>
-                                          <h4 class="timeline-title">Outlier.ai<br>Role:Data Annotator (RLHF) </h4>
+                                          <h4 class="timeline-title">DC's AI HUB<br>Research Assistant (ML Researcher)</h4>
                                           <p class="timeline-text">
-                                            Fine-tuned Large Language Models (LLMs) using multivariate testing and engineered feedback loops.<br>
-                                            Improved model performance through targeted fine-tuning and sentiment analysis.<br>
-                                            <strong>Tools used:</strong> clustering, classification, outlier detection, Prompt‐Engineering.
+                                            Designed and deployed AI-powered systems using LLMs and RAG with optimized inference and workflows.
                                           </p>
-                                          <div class="indian-flag"></div>
+                                          <div class="canadian-flag"></div>
                                       </div>
 
                                       <!-- timeline item -->
                                       <div class="timeline-item">
                                           <div class="circle-dot"></div>
                                           <h3 class="timeline-date">
-                                              <i class="fa fa-calendar"></i> Nov 2022 - August 2023
+                                              <i class="fa fa-calendar"></i> Nov 2022 - Aug 2023
                                           </h3>
-                                          <h4 class="timeline-title">eClerx Services Ltd. <br>Role: Associate Program Manager - ML Engineer </h4>
-                                          <p class="timeline-text">I worked with the Data Acquisition team, where I honed my scripting and buuilding recommendation model skills.</p>
+                                          <h4 class="timeline-title">Outlier.ai/eClerx Services<br>Machine Learning Engineer</h4>
+                                          <p class="timeline-text">
+                                            Built scalable data pipelines, developed predictive models, and fine-tuned Large Language Models using feedback loops.
+                                          </p>
                                           <div class="indian-flag"></div>
                                       </div>
 
                                       <div class="timeline-item">
                                           <div class="circle-dot"></div>
                                           <h3 class="timeline-date">
-                                              <i class="fa fa-calendar"></i> July 2018 - Nov 2022
+                                              <i class="fa fa-calendar"></i> Jul 2018 - Nov 2022
                                           </h3>
-                                          <h4 class="timeline-title">Tata Consultancy expertises Ltd. <br> Role: Data Scientist ( Research & Innovation )</h4>
-                                          <p class="timeline-text">In TCS, I got the chance to work with multiple domains such as Financial Services (BFSI) handling India's major payment gateway such as RTGS, NEFT & IMPS. After which i switched my domain to TCS Research & Innovation Group (RNI) where i got my knowledge of building forecasting and predictive models from scratch. </p>
+                                          <h4 class="timeline-title">Tata Consultancy Services<br>Data Scientist (Research & Innovation)</h4>
+                                          <p class="timeline-text">
+                                            Developed forecasting models using ARIMA/SARIMA and quantum algorithms, built real-time data processing pipelines.
+                                          </p>
                                           <div class="indian-flag"></div>
                                       </div>
 
@@ -658,7 +720,234 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js" referrerpolicy="no-referrer"></script>
   <script src="{% static 'js/script.js' %}"></script>
   <script src="{% static 'js/style-switcher.js' %}"></script>
-
+  <!-- Add AOS JS -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <!-- Add Vanilla-tilt.js for 3D hover effects -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+  
+  <script>
+    // Initialize AOS animations
+    AOS.init({
+      once: false,
+      mirror: true,
+      anchorPlacement: 'top-bottom'
+    });
+    
+    // Initialize tilt effect for profile image
+    VanillaTilt.init(document.querySelector(".tilt-image"), {
+      max: 15,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.2,
+    });
+    
+    // Initialize tilt effect for portfolio cards
+    VanillaTilt.init(document.querySelectorAll(".portfolio-card"), {
+      max: 10,
+      speed: 300,
+      glare: false,
+      scale: 1.05,
+    });
+    
+    // Improved button hover effect
+    document.querySelectorAll('.btn').forEach(button => {
+      button.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+        this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
+      });
+      
+      button.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+      });
+    });
+    
+    // Add progress bar animation on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const animateProgressBars = () => {
+        const progressBars = document.querySelectorAll('.progress-in');
+        
+        progressBars.forEach(progressBar => {
+          const rect = progressBar.getBoundingClientRect();
+          const isInViewport = rect.top <= window.innerHeight && rect.bottom >= 0;
+          
+          if (isInViewport) {
+            progressBar.style.width = progressBar.style.width || progressBar.getAttribute('style').split('width:')[1].split(';')[0];
+            progressBar.style.animation = 'progress 1.5s ease-in-out forwards';
+          }
+        });
+      };
+      
+      window.addEventListener('scroll', animateProgressBars);
+      animateProgressBars(); // Initial check
+    });
+    
+    // Add styles programmatically
+    const styleElement = document.createElement('style');
+    styleElement.textContent = `
+      /* Button animations */
+      .btn {
+        transition: all 0.3s ease !important;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: all 0.6s;
+      }
+      
+      .btn:hover:before {
+        left: 100%;
+      }
+      
+      .btn-animated {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      
+      .btn-animated .btn-icon {
+        display: inline-flex;
+        transition: transform 0.3s ease;
+      }
+      
+      .btn-animated:hover .btn-icon {
+        transform: translateY(-3px);
+      }
+      
+      /* Progress bar animation */
+      @keyframes progress {
+        0% { width: 0; }
+        100% { width: attr(data-width); }
+      }
+      
+      /* Portfolio item styling */
+      .portfolio-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        transition: all 0.4s ease;
+      }
+      
+      .portfolio-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: all 0.4s ease;
+      }
+      
+      .portfolio-card:hover .portfolio-overlay {
+        opacity: 1;
+      }
+      
+      .portfolio-info {
+        text-align: center;
+        padding: 20px;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+      }
+      
+      .portfolio-card:hover .portfolio-info {
+        transform: translateY(0);
+      }
+      
+      .portfolio-info h4 {
+        color: var(--skin-color);
+        margin-bottom: 10px;
+      }
+      
+      .portfolio-info p {
+        color: white;
+        margin-bottom: 15px;
+      }
+      
+      .btn-sm {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+      
+      /* Form styling */
+      .form-control {
+        padding: 8px 15px;
+        border-radius: 5px;
+        border: 1px solid var(--bg-black-50);
+        background-color: var(--bg-black-100);
+        color: var(--text-black-700);
+        transition: all 0.3s ease;
+      }
+      
+      .form-control:focus {
+        border-color: var(--skin-color);
+        box-shadow: 0 0 10px rgba(76, 184, 196, 0.2);
+      }
+      
+      /* GitHub link styling */
+      .github-link {
+        position: relative;
+        transition: all 0.3s ease;
+        padding: 0 5px;
+      }
+      
+      .github-link:hover {
+        color: var(--skin-color);
+      }
+      
+      /* Add more animated elements */
+      .animated-btn {
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        transition: all 0.4s ease;
+      }
+      
+      .animated-btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--skin-color);
+        z-index: -1;
+        transform: scaleX(0);
+        transform-origin: 0 50%;
+        transition: transform 0.5s ease-out;
+      }
+      
+      .animated-btn:hover:before {
+        transform: scaleX(1);
+      }
+      
+      .predict-form {
+        background: var(--bg-black-100);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+      
+      .predict-form:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      }
+    `;
+    document.head.appendChild(styleElement);
+  </script>
 
 </body>
 </html>

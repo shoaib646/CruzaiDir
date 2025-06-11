@@ -174,15 +174,18 @@ ul
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     z-index: 10;
     transition: all 0.3s ease;
+    overflow-y: auto;
 }
 .aside .logo
 {
     position: absolute;
     top: 50px;
+    text-align: center;
     font-size: 30px;
-    /* text-transform: capitalize; */
+    width: 100%;
 }
 .aside .logo a
 {
@@ -296,21 +299,28 @@ ul
 }
 .aside .nav
 {
-    margin-top: 50px;
+    margin-top: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
 }
 .aside .nav li
 {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     display: block;
+    width: 100%;
 }
 .aside .nav li a
 {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     display: block;
     border-bottom: 1px solid var(--bg-black-50);
     color: var(--text-black-900);
-    padding: 5px 15px;
+    padding: 8px 15px;
+    text-align: left;
+    width: 100%;
+    transition: all 0.3s ease;
 }
 .aside .nav li a.active
 {

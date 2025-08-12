@@ -7,3 +7,8 @@ __pycache__/
 .cursorindexingignore
 .env
 .specstory/*
+pyvenv.cfg
+venv/*
+lib/*
+vscode/*
+bin/*

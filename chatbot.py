@@ -6,6 +6,7 @@ from langchain.chat_models import init_chat_model
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from pinecone import Pinecone
+from pinecone import Pinecone, ServerlessSpec
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -22,7 +23,7 @@ import matplotlib.pyplot as plt
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 from langchain_core.callbacks import BaseCallbackHandler
 
-st.set_page_config(page_title="Cruz AI Agent", page_icon="🤖", layout="wide")
+st.set_page_config(page_title="Cruz AI Chatbot", page_icon="🤖", layout="wide")
 
 # Apply custom CSS
 st.markdown("""
@@ -179,10 +180,14 @@ with st.sidebar:
                 # Check if index exists, if not create it
                 if "cruzai-index" not in [idx.name for idx in pc.list_indexes()]:
                     pc.create_index(
-                        name="cruzai-index",
-                        dimension=1536,
-                        metric="cosine"
-                    )
+    name="cruzai-index",
+    spec=ServerlessSpec(
+        cloud="aws",
+        region="us-east-1"
+    ),
+    dimension=1536,
+    metric="cosine"
+)
                 
                 index = pc.Index("cruzai-index")
                 vector_store = PineconeVectorStore(embedding=embeddings, index=index)

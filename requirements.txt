@@ -3,10 +3,10 @@ pandas==2.2.0
 scikit-learn
 statsmodels
 django-cors-headers
-langchain
+langchain==0.2.10
+langchain-openai
 langchain_community
 langchain_core
-langchain_openai
 langchain_pinecone
 langchain_text_splitters
 langgraph
